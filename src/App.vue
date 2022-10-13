@@ -25,6 +25,10 @@
     <p>{{ fullName }}</p>
     <hr />
     <button type="button" @click.prevent="printTime">按鈕</button>
+    <hr />
+    <button type="button" @click.prevent="hasError = !hasError">按鈕</button>
+    <p v-if="hasError">fail</p>
+    <p v-else>success</p>
   </div>
 </template>
 
@@ -111,6 +115,9 @@ const printTime = async () => {
   await delay(3000);
   console.log(Date.now());
 };
+
+// #8
+const hasError = ref(true);
 </script>
 
 <style></style>
