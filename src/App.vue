@@ -9,7 +9,13 @@
     >
       按鈕
     </button>
-    <pre>{{ storage.products }}</pre>
+    <ul>
+      <li v-for="(product, index) in storage.products" :key="index">
+        <p>名稱: {{ product.title }}</p>
+        <p>價錢: {{ product.price }}</p>
+      </li>
+    </ul>
+    <!-- <pre>{{ storage.products }}</pre> -->
     <hr />
     <button type="button" @click.prevent="updateYearAndMonth('2022', 10)">
       按鈕
@@ -29,6 +35,33 @@
     <button type="button" @click.prevent="hasError = !hasError">按鈕</button>
     <p v-if="hasError">fail</p>
     <p v-else>success</p>
+    <hr />
+    <button
+      type="button"
+      @click.prevent="products.push({ title: '薯條', price: 49 })"
+    >
+      按鈕
+    </button>
+    <ul>
+      <li v-for="({ title, price }, index) in products" :key="index">
+        <p>索引: {{ index }}</p>
+        <p>名稱: {{ title }}</p>
+        <p>價錢: {{ price }}</p>
+      </li>
+    </ul>
+    <hr />
+    <button type="button" @click="person.age += 1">按鈕</button>
+    <ul>
+      <li v-for="(value, key, index) in person" :key="key">
+        <p>索引: {{ index }}</p>
+        <p>鍵: {{ key }}</p>
+        <p>值: {{ value }}</p>
+      </li>
+    </ul>
+    <hr />
+    <button type="button" @click.middle="buttonHandler('prod', $event)">
+      按鈕
+    </button>
   </div>
 </template>
 
@@ -118,6 +151,24 @@ const printTime = async () => {
 
 // #8
 const hasError = ref(true);
+
+// #9
+const products = ref([
+  { title: '汽水', price: 29 },
+  { title: '漢堡', price: 69 },
+]);
+
+// #10
+const person = ref({
+  name: 'Ian',
+  age: 24,
+});
+
+// #11
+const buttonHandler = (mode: 'dev' | 'prod', e: Event) => {
+  console.log(mode);
+  console.log(e);
+};
 </script>
 
 <style></style>
