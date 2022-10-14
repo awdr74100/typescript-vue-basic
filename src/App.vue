@@ -62,6 +62,36 @@
     <button type="button" @click.middle="buttonHandler('prod', $event)">
       按鈕
     </button>
+    <hr />
+    <form action="#" @submit.prevent="register">
+      <label for="username">名稱:</label>
+      <input
+        type="text"
+        id="username"
+        v-model="username"
+        placeholder="請輸入名稱"
+      />
+      <label for="password">密碼:</label>
+      <input
+        type="password"
+        id="password"
+        v-model="password"
+        placeholder="請輸入密碼"
+      />
+      <button type="submit">註冊</button>
+    </form>
+    <hr />
+    <label for="isAdmin">管理員</label>
+    <input type="checkbox" id="isAdmin" v-model="isAdmin" />
+    <p>{{ isAdmin }}</p>
+    <hr />
+    <label for="inputNumber">{{ inputNumber }}</label>
+    <input type="number" id="inputNumber" v-model.number="inputNumber" />
+    <label for="inputText">{{ inputText }}</label>
+    <input type="text" v-model.trim="inputText" />
+    <hr />
+    <input type="text" v-model="nickname" />
+    <p>{{ nickname }}</p>
   </div>
 </template>
 
@@ -169,6 +199,24 @@ const buttonHandler = (mode: 'dev' | 'prod', e: Event) => {
   console.log(mode);
   console.log(e);
 };
+
+// #12
+const username = ref('');
+const password = ref('');
+
+const register = () => {
+  console.log(username.value, password.value);
+};
+
+// #13
+const isAdmin = ref(true);
+
+// #14
+const inputNumber = ref(0);
+const inputText = ref('');
+
+// #15
+const nickname = ref('');
 </script>
 
 <style></style>
