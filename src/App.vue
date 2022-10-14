@@ -92,11 +92,13 @@
     <hr />
     <input type="text" v-model="nickname" />
     <p>{{ nickname }}</p>
+    <hr />
+    <input type="text" v-model.trim="selectNumber" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, computed } from 'vue';
+import { reactive, ref, computed, onMounted, watch } from 'vue';
 
 // #1
 
@@ -217,6 +219,19 @@ const inputText = ref('');
 
 // #15
 const nickname = ref('');
+
+// #16
+// onMounted(() => {
+//   console.log('Bang');
+// });
+
+// console.log(123);
+
+// #17
+const selectNumber = ref('');
+watch(selectNumber, (newValue, oldValue) => {
+  console.log(newValue, typeof oldValue);
+});
 </script>
 
 <style></style>
