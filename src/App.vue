@@ -96,11 +96,14 @@
     <input type="text" v-model.trim="selectNumber" />
     <hr />
     <input type="text" v-model="url" />
+    <hr />
+    <ButtonCounter />
   </div>
 </template>
 
 <script setup lang="ts">
 import { reactive, ref, computed, onMounted, watch, watchEffect } from 'vue';
+import ButtonCounter from './components/ButtonCounter.vue';
 
 // #1
 
@@ -246,14 +249,12 @@ interface Post {
 const url = ref('https://jsonplaceholder.typicode.com/posts');
 const data = ref<Post[]>([]);
 
-watchEffect(async () => {
-  data.value = await fetch(url.value).then(
-    (res) => res.json() as Promise<Post[]>,
-  );
-  console.log(data.value);
-});
-
-// #19
+// watchEffect(async () => {
+//   data.value = await fetch(url.value).then(
+//     (res) => res.json() as Promise<Post[]>,
+//   );
+//   console.log(data.value);
+// });
 </script>
 
 <style></style>
