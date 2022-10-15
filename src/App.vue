@@ -94,11 +94,13 @@
     <p>{{ nickname }}</p>
     <hr />
     <input type="text" v-model.trim="selectNumber" />
+    <hr />
+    <input type="text" v-model="url" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, computed, onMounted, watch } from 'vue';
+import { reactive, ref, computed, onMounted, watch, watchEffect } from 'vue';
 
 // #1
 
@@ -232,6 +234,26 @@ const selectNumber = ref('');
 watch(selectNumber, (newValue, oldValue) => {
   console.log(newValue, typeof oldValue);
 });
+
+// #18
+interface Post {
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
+}
+
+const url = ref('https://jsonplaceholder.typicode.com/posts');
+const data = ref<Post[]>([]);
+
+watchEffect(async () => {
+  data.value = await fetch(url.value).then(
+    (res) => res.json() as Promise<Post[]>,
+  );
+  console.log(data.value);
+});
+
+// #19
 </script>
 
 <style></style>
