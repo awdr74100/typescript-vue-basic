@@ -97,7 +97,9 @@
     <hr />
     <input type="text" v-model="url" />
     <hr />
-    <ButtonCounter />
+    <span>{{ totalCount }}</span>
+    <ButtonCounter color="red" @updateTotalCount="updateTotalCount" />
+    <ButtonCounter color="green" @updateTotalCount="updateTotalCount" />
   </div>
 </template>
 
@@ -106,7 +108,6 @@ import { reactive, ref, computed, onMounted, watch, watchEffect } from 'vue';
 import ButtonCounter from './components/ButtonCounter.vue';
 
 // #1
-
 const state = reactive({ count: 0 });
 
 const increment = (num: number) => {
@@ -114,7 +115,6 @@ const increment = (num: number) => {
 };
 
 // #2
-
 interface Product {
   title: string;
   price: number;
@@ -131,7 +131,6 @@ const addProduct = (product: Product) => {
 };
 
 // #3
-
 const year = ref<string | number>(2020);
 const month = ref(1);
 
@@ -141,12 +140,10 @@ const updateYearAndMonth = (y: string | number, m: number) => {
 };
 
 // #4
-
 const object = { foo: ref(1) };
 const { foo } = object;
 
 // #5
-
 const author = reactive({
   name: 'John Doe',
   books: [
@@ -255,6 +252,17 @@ const data = ref<Post[]>([]);
 //   );
 //   console.log(data.value);
 // });
+
+// #19
+const totalCount = ref(0);
+
+// const updateTotalCount = (count: number) => {
+//   totalCount.value += count;
+// };
+// const updateTotalCount = () => {};
+function updateTotalCount(count: number) {
+  totalCount.value += count;
+}
 </script>
 
 <style></style>
